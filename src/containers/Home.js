@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions';
 import GifList from '../components/GifList';
