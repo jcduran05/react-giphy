@@ -1,61 +1,74 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import GifList from './components/GifList';
-import GifModal from './components/GifModal';
-import SearchBar from './components/SearchBar';
-import './index.css';
+import App from './containers/App';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const store = configureStore();
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+);
 
-    this.state = {
-      gifs: [],
-      selectedGif: null,
-      modalIsOpen: false
-    }
+// import axios from 'axios';
+// import GifList from './components/GifList';
+// import GifModal from './components/GifModal';
+// import SearchBar from './components/SearchBar';
+// import './styles/app.css';
 
-    this.handleTermChange = this.handleTermChange.bind(this);
-  }
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
 
-  openModal(gif) {
-    this.setState({
-      modalIsOpen: true,
-      selectedGif: gif
-    });
-  }
+//     this.state = {
+//       gifs: [],
+//       selectedGif: null,
+//       modalIsOpen: false
+//     }
 
-  closeModal() {
-    this.setState({
-      modalIsOpen: false,
-      selectedGif: null
-    });
-  }
+//     this.handleTermChange = this.handleTermChange.bind(this);
+//   }
 
-  handleTermChange(term) {
-    const url = `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=8`;
+//   openModal(gif) {
+//     this.setState({
+//       modalIsOpen: true,
+//       selectedGif: gif
+//     });
+//   }
 
-    axios.get(url)
-    .then(res => {
-      this.setState({ gifs: res.data.data })
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
+//   closeModal() {
+//     this.setState({
+//       modalIsOpen: false,
+//       selectedGif: null
+//     });
+//   }
 
-  render() {
-    return (
-      <div>
-        <SearchBar onTermChange={term => this.handleTermChange(term)} />
-        <GifList gifs={this.state.gifs} onGifSelect={selectedGif => this.openModal(selectedGif) } />
-        <GifModal modalIsOpen={this.state.modalIsOpen}
-                  selectedGif={this.state.selectedGif}
-                  onRequestClose={ () => this.closeModal() } />
-      </div>
-    );
-  }
-}
+//   handleTermChange(term) {
+//     const url = `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=8`;
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//     axios.get(url)
+//     .then(res => {
+//       this.setState({ gifs: res.data.data })
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         <SearchBar onTermChange={term => this.handleTermChange(term)} />
+//         <GifList gifs={this.state.gifs} onGifSelect={selectedGif => this.openModal(selectedGif) } />
+//         <GifModal modalIsOpen={this.state.modalIsOpen}
+//                   selectedGif={this.state.selectedGif}
+//                   onRequestClose={ () => this.closeModal() } />
+//       </div>
+//     );
+//   }
+// }
+
+
+// ReactDOM.render(<App />, document.getElementById('root'));
