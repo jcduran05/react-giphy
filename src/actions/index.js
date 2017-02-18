@@ -14,11 +14,11 @@ const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = `&api_key=${process.env.REACT_APP_GIPHY_KEY}&limit=8`
 
 var config = {
-  apiKey: "AIzaSyDIeysaU3-HWaeglltxW52cUnICDZIsJDc",
-  authDomain: "react-gif-search-84fa5.firebaseapp.com",
-  databaseURL: "https://react-gif-search-84fa5.firebaseio.com",
-  storageBucket: "react-gif-search-84fa5.appspot.com",
-  messagingSenderId: "993423880833"
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH,
+  databaseURL: process.env.REACT_APP_FIREBASE_DB,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER
 };
 
 Firebase.initializeApp(config);
